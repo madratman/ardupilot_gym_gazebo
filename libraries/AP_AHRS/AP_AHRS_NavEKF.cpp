@@ -580,6 +580,7 @@ bool AP_AHRS_NavEKF::healthy(void) const
     // If EKF is started we switch away if it reports unhealthy. This could be due to bad
     // sensor data. If EKF reversion is inhibited, we only switch across if the EKF encounters
     // an internal processing error, but not for bad sensor data.
+    return true;
     switch (ekf_type()) {
     case 0:
         return AP_AHRS_DCM::healthy();

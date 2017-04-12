@@ -599,12 +599,12 @@ void Copter::pre_arm_rc_checks()
 bool Copter::pre_arm_gps_checks(bool display_failure)
 {
     // always check if inertial nav has started and is ready
-    if(!ahrs.healthy()) {
-        if (display_failure) {
-            gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("PreArm: Waiting for Nav Checks"));
-        }
-        return false;
-    }
+    // if(!ahrs.healthy()) {
+    //     if (display_failure) {
+    //         gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("PreArm: Waiting for Nav Checks"));
+    //     }
+    //     return false;
+    // }
 
     // check if flight mode requires GPS
     bool gps_required = mode_requires_GPS(control_mode);
@@ -641,12 +641,12 @@ bool Copter::pre_arm_gps_checks(bool display_failure)
     Vector3f mag_variance;
     Vector2f offset;
     ahrs.get_variances(vel_variance, pos_variance, hgt_variance, mag_variance, tas_variance, offset);
-    if (mag_variance.length() >= g.fs_ekf_thresh) {
-        if (display_failure) {
-            gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("PreArm: EKF compass variance"));
-        }
-        return false;
-    }
+    // if (mag_variance.length() >= g.fs_ekf_thresh) {
+    //     if (display_failure) {
+    //         gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("PreArm: EKF compass variance"));
+    //     }
+    //     return false;
+    // }
 
     // check home and EKF origin are not too far
     if (far_from_EKF_origin(ahrs.get_home())) {
@@ -691,6 +691,7 @@ bool Copter::pre_arm_ekf_attitude_check()
 //  has side-effect that logging is started
 bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
 {
+    return true;
 #if LOGGING_ENABLED == ENABLED
     // start dataflash
     start_logging();
@@ -720,12 +721,12 @@ bool Copter::arm_checks(bool display_failure, bool arming_from_gcs)
     }
 
     // always check if inertial nav has started and is ready
-    if(!ahrs.healthy()) {
-        if (display_failure) {
-            gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("Arm: Waiting for Nav Checks"));
-        }
-        return false;
-    }
+    // if(!ahrs.healthy()) {
+    //     if (display_failure) {
+    //         gcs_send_text_P(MAV_SEVERITY_CRITICAL,PSTR("Arm: Waiting for Nav Checks"));
+    //     }
+    //     return false;
+    // }
 
     if(compass.is_calibrating()) {
         if (display_failure) {
