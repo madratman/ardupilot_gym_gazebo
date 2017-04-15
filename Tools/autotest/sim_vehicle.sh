@@ -628,7 +628,7 @@ echo "Starting MavProxy : mavproxy.py $options --cmd=\"$extra_cmd\" $*"
 if [ -f /usr/bin/cygstart ]; then
     cygstart -w "/cygdrive/c/Program Files (x86)/MAVProxy/mavproxy.exe" $options --cmd="$extra_cmd" $*
 else
-    mavproxy.py $options --cmd="$extra_cmd" $*
+    mavproxy.py $options --cmd="$extra_cmd param load /home/vaibhav/madratman/projects/gym_gazebo_deps/simulation/ardupilot/Tools/Frame_params/Erle-Copter.param" $*
 fi
 if [ $START_HIL == 0 ]; then
 kill_tasks
